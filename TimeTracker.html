@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #343a40; /* Fondo oscuro */
+            margin: 0;
+            color: white; /* Color de texto blanco */
+        }
+        .container {
+            max-width: 45%; /* Ancho del 45% */
+            width: 100%; /* Asegura que ocupe el ancho completo dentro del límite */
+            padding: 20px; /* Espaciado interior */
+            background-color: #495057; /* Fondo del contenedor */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+        }
+        .alert-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 300px;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px; /* Espaciado inferior */
+            width: 100px; /* Ajusta el tamaño según necesites */
+        }
+    </style>
+    <script>
+    $(document).ready(function() {
+        getEmployees();
+    });
+
+    function getEmployees() {
+        google.script.run.withSuccessHandler(function(ar) {
+            var employeeSelect = document.getElementById("employee");
+            employeeSelect.innerHTML = ''; // Clear previous entries
+            let option = document.createElement("option");
+            option.value = "";
+            option.text = "Select an Employee";
+            employeeSelect.appendChild(option);
+
+            ar.forEach(function(item) {     
+                let option = document.createElement("option");
+                option.value = item[0];
+                option.text = item[0];
+                employeeSelect.appendChild(option);     
+            });
+        }).getEmployees();
+    }
+
+    function ClockIn() {
+        $('#message').html("");
+        var employee = document.getElementById("employee").value;
+        var date = document.getElementById("date").value;
+        var time = document.getElementById("time").value;
+
+        if (!date || !time || !employee) {
+            showAlert('Error', 'Please fill in all fields.', 'warning');
+            return;
+        }
+
+        // Combina la fecha y la hora
+        var clockTime = date + 'T' + time; // Formato ISO
+
+        google.script.run.withSuccessHandler(function(ar) {
+            ar.forEach(function(item) {
+                if (item[0] == 'SUCCESS') {
+                    showAlert('Approved', item[2] + ' Clocked in successfully.', 'success');
+                } else {
+                    showAlert('Error', item[2] + ' ' + item[0], 'warning');
+                }
+            });
+        }).clockIn(employee, clockTime); // Envía clockTime a la función clockIn
+    }
+
+    function ClockOut() {
+        $('#message').html("");
+        var employee = document.getElementById("employee").value;
+
+        google.script.run.withSuccessHandler(function(ar) {
+            ar.forEach(function(item) {
+                if (item[0] == 'SUCCESS') {
+                    showAlert('Approved', item[2] + ' Clocked out successfully.', 'success');
+                } else {
+                    showAlert('Error', item[2] + ' ' + item[0], 'warning');
+                }
+            });
+        }).clockOut(employee);
+    }
+
+    function showAlert(title, message, type) {
+        var alertPopup = $('#alert-popup');
+        alertPopup.removeClass('alert-success alert-warning').addClass('alert-' + type);
+        $('#alert-title').text(title);
+        $('#alert-message').text(message);
+        alertPopup.show();
+
+        setTimeout(function() {
+            alertPopup.hide();
+        }, 3000);
+    }
+    </script>
+</head>
+<body>
+<div class="alert alert-dismissible alert-success alert-popup" id="alert-popup" role="alert">
+    <strong id="alert-title"></strong> <span id="alert-message"></span>
+</div>
+<div class="container text-center">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9hP6UK9fwB69stypy-mriB_AXgEVNoQpSLkHMJBqbgoBKrGt7k3hR7Ay-Y4_WEYegVk7__oamLCTuo5O1_SE_vs9MqG_X3olHYsLpRodyjqqsgoFfrsmajWJmhxogahzPE7uxHIMR1luG8fPqgXxz_RcXmzC9KP9Orq4nSaE5dS40IgJpSZinDBYXLuoJ/w213-h213/pngegg%20(1).png" alt="Logo" class="logo" />
+    <h1 class="mb-3">Time Tracker</h1>
+    <form>
+        <div class="form-group">
+            <label for="employee">Agent</label>
+            <select class="form-control" id="employee"></select>
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" />
+        </div>
+        <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" class="form-control" id="time" />
+        </div>
+        <button type="button" class="btn btn-primary" id="clockin" onclick="ClockIn()">
+            Clock In
+        </button>
+        <button type="button" class="btn btn-primary" id="clockout" onclick="ClockOut()">
+            Clock Out
+        </button>
+    </form>
+</div>
+</body>
+</html>
+
+

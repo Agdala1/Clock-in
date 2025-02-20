@@ -13,23 +13,21 @@ Integración con Google Sheets: Todo se guarda directamente en tu hoja de cálcu
 
 # Clock In - Google Sheets
 
-![Captura de Pantalla](https://github.com/Agdala1/Clock-in/blob/main/img/Captura%20de%20pantalla%202025-02-19%20154926.png?raw=true)
+![Captura de Pantalla](https://github.com/Agdala1/Clock-in/blob/main/img/Captura%20de%20pantalla%202025-02-19%20192316.png?raw=true)
 
 ## Cómo Usar
 
 1. **Configura Google Sheets**:
    - Crea una nueva hoja de cálculo y copia la estructura proporcionada.
 
-   ![Estructura de la Hoja](https://github.com/tu-usuario/tu-repositorio/blob/main/images/sheet-structure.png?raw=true)
+   ![Estructura de la Hoja](https://github.com/Agdala1/Clock-in/blob/main/img/Captura%20de%20pantalla%202025-02-19%20154736.png?raw=true)
 
 2. **Configura el Script**:
    - Abre Google Apps Script y pega el código.
 
-   ![Editor de Apps Script](https://github.com/tu-usuario/tu-repositorio/blob/main/images/apps-script.png?raw=true)
+   ![Editor de Apps Script](https://github.com/Agdala1/Clock-in/blob/main/img/Captura%20de%20pantalla%202025-02-19%20192009.png?raw=true)
 
 3. **Usa el Botón de Clock In**:
    - Agrega un botón y asígnalo a la función `clockIn()`.
-
-   ![Botón de Clock In](https://github.com/tu-usuario/tu-repositorio/blob/main/images/clock-in-button.png?raw=true)
 
    Pruebalo https://script.google.com/macros/s/AKfycbxH8vyPK3wdmwMYnUur7C7zxqRFrSNOZyXpVal9jtoEDPBpvns8KqwiEdq1VD3fPmkZ/exec

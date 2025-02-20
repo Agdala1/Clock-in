@@ -31,3 +31,5 @@ Integración con Google Sheets: Todo se guarda directamente en tu hoja de cálcu
    - Agrega un botón y asígnalo a la función `clockIn()`.
 
    ![Botón de Clock In](https://github.com/tu-usuario/tu-repositorio/blob/main/images/clock-in-button.png?raw=true)
+
+   Pruebalo https://script.google.com/macros/s/AKfycbxH8vyPK3wdmwMYnUur7C7zxqRFrSNOZyXpVal9jtoEDPBpvns8KqwiEdq1VD3fPmkZ/exec

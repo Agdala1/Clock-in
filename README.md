@@ -13,7 +13,7 @@ Integración con Google Sheets: Todo se guarda directamente en tu hoja de cálcu
 
 # Clock In - Google Sheets
 
-![Captura de Pantalla](https://github.com/tu-usuario/tu-repositorio/blob/main/images/screenshot.png?raw=true)
+![Captura de Pantalla](https://github.com/Agdala1/Clock-in/blob/main/img/Captura%20de%20pantalla%202025-02-19%20154654.png?raw=true)
 
 ## Cómo Usar
 
